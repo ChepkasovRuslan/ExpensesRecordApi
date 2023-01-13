@@ -6,7 +6,7 @@ const getExpenses = async (req, res) => {
   try {
     const expenses = await getAllExpenses();
 
-    res.status(201).send(expenses);
+    res.status(200).send(expenses);
   } catch (error) {
     res.status(404).send('Failed to find tasks');
   }
