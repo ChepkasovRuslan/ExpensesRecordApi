@@ -14,11 +14,8 @@ const loadApp = async () => {
       useUnifiedTopology: true
     });
 
-    app.listen(PORT, () => {
-      console.log('Expenses API listening on ' + PORT);
-    });
+    app.listen(PORT);
   } catch (error) {
-    console.log(error);
     process.exit(1);
   }
 }
