@@ -25,9 +25,17 @@ const deleteAllExpenses = async () => {
   return deletedExpenses;
 }
 
+const updateExpenseById = async (id, body) => {
+  const updatedExpense = await Expense.findByIdAndUpdate(id, body);
+  console.log(body);
+
+  return updatedExpense;
+}
+
 module.exports = {
   getAllExpenses,
   createOneExpense,
   deleteOneExpenseById,
-  deleteAllExpenses
+  deleteAllExpenses,
+  updateExpenseById
 };
