@@ -6,6 +6,14 @@ const getAllExpenses = async () => {
   return allExpenses;
 }
 
+const createOneExpense = async body => {
+  const expense = new Expense(body);
+  const savedExpense = await expense.save();
+
+  return savedExpense;
+}
+
 module.exports = {
-  getAllExpenses
+  getAllExpenses,
+  createOneExpense
 };

@@ -9,6 +9,10 @@ const expenseSchema = new Schema({
   sum: {
     type: Number,
     default: 0
+  },
+  date: {
+    type: String,
+    default: new Date(Date.now()).toLocaleString()
   }
 });
 
