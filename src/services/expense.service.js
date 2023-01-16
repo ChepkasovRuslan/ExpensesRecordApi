@@ -13,7 +13,21 @@ const createOneExpense = async body => {
   return savedExpense;
 }
 
+const deleteOneExpenseById = async (id) => {
+  const deletedExpense = await Expense.findByIdAndDelete(id);
+
+  return deletedExpense;
+}
+
+const deleteAllExpenses = async () => {
+  const deletedExpenses = await Expense.deleteMany({});
+
+  return deletedExpenses;
+}
+
 module.exports = {
   getAllExpenses,
-  createOneExpense
+  createOneExpense,
+  deleteOneExpenseById,
+  deleteAllExpenses
 };

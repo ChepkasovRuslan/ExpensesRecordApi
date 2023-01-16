@@ -1,7 +1,9 @@
 const { validationResult } = require('express-validator');
 const {
   getAllExpenses,
-  createOneExpense
+  createOneExpense,
+  deleteAllExpenses,
+  deleteOneExpenseById
 } = require('../services/expense.service');
 
 const getExpenses = async (req, res) => {
@@ -28,7 +30,29 @@ const postExpense = async (req, res) => {
   }
 }
 
+const deleteExpense = async (req, res) => {
+  try {
+    const result = await deleteOneExpenseById(req.params.id);
+
+    res.status(202).send(result);
+  } catch (error) {
+    res.status(500).send('Failed to delete expenses');
+  }
+}
+
+const deleteExpenses = async (req, res) => {
+  try {
+    const result = await deleteAllExpenses();
+
+    res.status(202).send(result);
+  } catch (error) {
+    res.status(404).send('Expense to delete not found');
+  }
+}
+
 module.exports = {
   getExpenses,
-  postExpense
+  postExpense,
+  deleteExpense,
+  deleteExpenses
 };
