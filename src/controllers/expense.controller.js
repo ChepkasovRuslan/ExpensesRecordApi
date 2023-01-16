@@ -3,7 +3,8 @@ const {
   getAllExpenses,
   createOneExpense,
   deleteAllExpenses,
-  deleteOneExpenseById
+  deleteOneExpenseById,
+  updateExpenseById
 } = require('../services/expense.service');
 
 const getExpenses = async (req, res) => {
@@ -50,9 +51,20 @@ const deleteExpenses = async (req, res) => {
   }
 }
 
+const patchExpense = async (req, res) => {
+  try {
+    const result = await updateExpenseById(req.params.id, req.body);
+
+    res.status(202).send(result);
+  } catch (error) {
+    res.status(500).send('Failed to patch expense');
+  }
+}
+
 module.exports = {
   getExpenses,
   postExpense,
   deleteExpense,
-  deleteExpenses
+  deleteExpenses,
+  patchExpense
 };
