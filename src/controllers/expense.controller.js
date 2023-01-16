@@ -1,5 +1,7 @@
+const { validationResult } = require('express-validator');
 const {
-  getAllExpenses
+  getAllExpenses,
+  createOneExpense
 } = require('../services/expense.service');
 
 const getExpenses = async (req, res) => {
@@ -12,6 +14,21 @@ const getExpenses = async (req, res) => {
   }
 }
 
+const postExpense = async (req, res) => {
+  try {
+    const errors = validationResult(req, res);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const expense = await createOneExpense(req.body);
+
+    res.status(201).send(expense);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 module.exports = {
-  getExpenses
+  getExpenses,
+  postExpense
 };
