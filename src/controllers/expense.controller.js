@@ -4,7 +4,8 @@ const {
   createOneExpense,
   deleteAllExpenses,
   deleteOneExpenseById,
-  updateExpenseById
+  updateExpenseById,
+  getTotalSum
 } = require('../services/expense.service');
 
 const getExpenses = async (req, res) => {
@@ -61,10 +62,21 @@ const patchExpense = async (req, res) => {
   }
 }
 
+const getSum = async (req, res) => {
+  try {
+    const totalSum = await getTotalSum();
+
+    res.status(200).send(totalSum);
+  } catch (error) {
+    res.status(500).send('Failed to calculate sum');
+  }
+}
+
 module.exports = {
   getExpenses,
   postExpense,
   deleteExpense,
   deleteExpenses,
-  patchExpense
+  patchExpense,
+  getSum
 };
