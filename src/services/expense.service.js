@@ -31,10 +31,27 @@ const updateExpenseById = async (id, body) => {
   return updatedExpense;
 }
 
+const getTotalSum = async () => {
+  const expenses = await getAllExpenses();
+  const totalSum = expenses.reduce((prev, curr) => prev + curr.sum, 0)
+
+  const result = Expense.aggregate([
+    {
+      $project:
+      {
+        totalSum: totalSum
+      }
+    }
+  ]);
+
+  return result._pipeline[0].$project;
+}
+
 module.exports = {
   getAllExpenses,
   createOneExpense,
   deleteOneExpenseById,
   deleteAllExpenses,
-  updateExpenseById
+  updateExpenseById,
+  getTotalSum
 };
