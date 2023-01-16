@@ -27,7 +27,6 @@ const deleteAllExpenses = async () => {
 
 const updateExpenseById = async (id, body) => {
   const updatedExpense = await Expense.findByIdAndUpdate(id, body);
-  console.log(body);
 
   return updatedExpense;
 }
