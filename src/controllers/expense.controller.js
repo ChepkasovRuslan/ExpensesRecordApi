@@ -13,7 +13,7 @@ const getExpenses = async (req, res) => {
 
     res.status(200).send(expenses);
   } catch (error) {
-    res.status(404).send('Failed to find tasks');
+    res.status(404).send('Failed to find expenses');
   }
 }
 
