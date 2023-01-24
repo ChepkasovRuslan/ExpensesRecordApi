@@ -6,6 +6,12 @@ const getAllExpenses = async () => {
   return allExpenses;
 }
 
+const getOneExpense = async id => {
+  const expense = await Expense.findById(id);
+
+  return expense;
+}
+
 const createOneExpense = async body => {
   const expense = new Expense(body);
   const savedExpense = await expense.save();
@@ -49,6 +55,7 @@ const getTotalSum = async () => {
 
 module.exports = {
   getAllExpenses,
+  getOneExpense,
   createOneExpense,
   deleteOneExpenseById,
   deleteAllExpenses,

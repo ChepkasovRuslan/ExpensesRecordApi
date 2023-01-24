@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const {
   getAllExpenses,
+  getOneExpense,
   createOneExpense,
   deleteAllExpenses,
   deleteOneExpenseById,
@@ -15,6 +16,16 @@ const getExpenses = async (req, res) => {
     res.status(200).send(expenses);
   } catch (error) {
     res.status(404).send('Failed to find expenses');
+  }
+}
+
+const getExpense = async (req, res) => {
+  try {
+    const expense = await getOneExpense(req.params.id);
+
+    res.status(200).send(expense);
+  } catch (error) {
+    res.status(404).send('Failed to find expense');
   }
 }
 
@@ -74,6 +85,7 @@ const getSum = async (req, res) => {
 
 module.exports = {
   getExpenses,
+  getExpense,
   postExpense,
   deleteExpense,
   deleteExpenses,
